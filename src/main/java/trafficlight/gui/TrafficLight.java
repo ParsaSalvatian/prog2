@@ -1,11 +1,14 @@
 package trafficlight.gui;
 
 
+import trafficlight.interfaces.Observer;
+import trafficlight.states.State;
+
 import java.awt.*;
 
-public class TrafficLight extends Light {
+public class TrafficLight extends Light implements Observer{
 
-    TrafficLight(Color color) {
+   public TrafficLight(Color color) {
         super(color);
     }
 
@@ -14,9 +17,27 @@ public class TrafficLight extends Light {
         repaint();
     }
 
+
     public boolean isOn() {
         return isOn;
     }
 
-    //TODO implement a part of the pattern here
+
+
+    @Override
+    public void update(String c) {
+        //TODO implement a part of the pattern here
+        turnOn((Color.RED.getRGB() == super.on.getRGB() && c.equalsIgnoreCase("RED"))
+                || (Color.YELLOW.getRGB() == super.on.getRGB() && c.equalsIgnoreCase("YELLOW"))
+                || (Color.GREEN.getRGB() == super.on.getRGB() && c.equalsIgnoreCase("GREEN")));
+    }
+
+
+
+
+
+
+    
+    
+
 }

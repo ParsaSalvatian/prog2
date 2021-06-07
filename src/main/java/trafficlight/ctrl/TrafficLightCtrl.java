@@ -1,7 +1,13 @@
 package trafficlight.ctrl;
 
+import trafficlight.gui.TrafficLight;
 import trafficlight.gui.TrafficLightGui;
+import trafficlight.interfaces.Observer;
+import trafficlight.interfaces.Subject;
 import trafficlight.states.State;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class TrafficLightCtrl {
 
@@ -19,20 +25,28 @@ public class TrafficLightCtrl {
 
     private boolean doRun = true;
 
+
+
+
     public TrafficLightCtrl() {
         super();
         initStates();
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
+        currentState = greenState;
+       gui.changeLight(currentState);
         //TODO useful to update the current state
     }
 
     private void initStates() {
         greenState = new State() {
+
             @Override
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
+                currentState=yellowState;
+
                 return yellowState;
             }
             @Override
@@ -46,6 +60,7 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
+                currentState=yellowState;
                 return yellowState;
             }
             @Override
@@ -60,10 +75,12 @@ public class TrafficLightCtrl {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
+                    currentState=redState;
                     return redState;
                 }else {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
+                    currentState=greenState;
                     return greenState;
                 }
             }
@@ -104,9 +121,17 @@ public class TrafficLightCtrl {
 
     public void nextState() {
         currentState = currentState.getNextState();
+        gui.changeLight(currentState);
+
     }
 
     public void stop() {
         doRun = false;
     }
+
+
+
+
+
+
 }
