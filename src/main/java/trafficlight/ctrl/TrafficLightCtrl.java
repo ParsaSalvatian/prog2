@@ -19,6 +19,9 @@ public class TrafficLightCtrl {
 
     private State currentState;
 
+    private static TrafficLightCtrl instance;
+
+
     private State previousState;
 
     private final TrafficLightGui gui;
@@ -37,6 +40,8 @@ public class TrafficLightCtrl {
        gui.changeLight(currentState);
         //TODO useful to update the current state
     }
+
+
 
     private void initStates() {
         greenState = new State() {
@@ -129,6 +134,12 @@ public class TrafficLightCtrl {
         doRun = false;
     }
 
+    public static TrafficLightCtrl getInstance() {
+        if (instance == null) {
+            instance = new TrafficLightCtrl();
+        }
+        return instance;
+    }
 
 
 

@@ -27,9 +27,9 @@ public class TrafficLight extends Light implements Observer{
     @Override
     public void update(String c) {
         //TODO implement a part of the pattern here
-        turnOn((Color.RED.getRGB() == super.on.getRGB() && c.equalsIgnoreCase("RED"))
-                || (Color.YELLOW.getRGB() == super.on.getRGB() && c.equalsIgnoreCase("YELLOW"))
-                || (Color.GREEN.getRGB() == super.on.getRGB() && c.equalsIgnoreCase("GREEN")));
+        turnOn((c.equalsIgnoreCase("RED") && Color.RED.getRGB() == super.on.getRGB() )
+                || (c.equalsIgnoreCase("YELLOW") && Color.YELLOW.getRGB() == super.on.getRGB())
+                || ( c.equalsIgnoreCase("GREEN") && Color.GREEN.getRGB() == super.on.getRGB() ));
     }
 
 
